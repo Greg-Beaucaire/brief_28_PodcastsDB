@@ -33,14 +33,13 @@
     print_r([$requete, $resultat]); // debug & vérification
 
     // Requête d'insertion
-    $requete = "INSERT INTO `podcasts` (`podcast_name`, `podcast_description`, `podcast_url`, `podcast_id`)
-                VALUES (:podcast_name, :podcast_description, :podcast_url, :podcast_id);";
+    $requete = "INSERT INTO `podcasts` (`podcast_name`, `podcast_description`, `podcast_url`)
+                VALUES (:podcast_name, :podcast_description, :podcast_url);";
     $prepare = $connexion->prepare($requete);
     $prepare->execute(array(
       ":podcast_name" => "L'affaire Benalla (1/4) : l'inconnu de la Contrescarpe",
       ":podcast_description" => "Mais qui sont ces policiers qui interpellent brutalement deux manifestants le 1er mai 2018, place de la Contrescarpe, à Paris ? Quelques semaines après la diffusion d’une vidéo sur les réseaux sociaux, la journaliste du \"Monde\", Ariane Chemin commence à s’intéresser à l’un d’eux. L’homme porte un brassard de police, mais les apparences peuvent être trompeuses…",
-      ":podcast_url" => "https://cdn.radiofrance.fr/s3/cruiser-production/2020/11/942a9fa8-8e02-43c7-ad06-3568d8c87099/l_affaire_benalla_episode_1_l_inconnu_de_la_contrescarpe.2020c41407e0005.ite_00111257_rsce.mp3",
-      ":podcast_id" => 4,
+      ":podcast_url" => "https://cdn.radiofrance.fr/s3/cruiser-production/2020/11/942a9fa8-8e02-43c7-ad06-3568d8c87099/l_affaire_benalla_episode_1_l_inconnu_de_la_contrescarpe.2020c41407e0005.ite_00111257_rsce.mp3"
     ));
     $resultat = $prepare->rowCount(); // rowCount() nécessite PDO::MYSQL_ATTR_FOUND_ROWS => true
     $lastInsertedEpisodeId = $connexion->lastInsertId(); // on récupère l'id automatiquement créé par SQL
